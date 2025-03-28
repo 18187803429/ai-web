@@ -14,9 +14,51 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "react-refresh",
+    "import",
     "prettier"
   ],
   "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          // Node内置
+          "external",
+          // npm包
+          "internal",
+          // 项目内部
+          "parent",
+          // 父目录
+          "sibling",
+          // 同级
+          "index"
+          // 目录索引
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@/**",
+            // 给别名路径特殊待遇
+            "group": "internal",
+            "position": "before"
+          }
+        ],
+        "newlines-between": "never",
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
+        "alphabetize": {
+          // 字母表排序
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     "react-refresh/only-export-components": [
       "warn",
       {

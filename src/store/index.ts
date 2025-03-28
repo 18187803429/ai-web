@@ -1,20 +1,21 @@
 //1.引入configureStore
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import logger from 'redux-logger'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import menu from './modules/menuReducer'
-import logger from 'redux-logger'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import chat from './modules/chatReducer'
 
 // 持久化配置
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  whitelist: ['chat']
 }
 
 // 合并模块
 const reducers = combineReducers({
-  menu
+  chat
 })
 
 const store = configureStore({
